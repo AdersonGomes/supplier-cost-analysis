@@ -1,20 +1,21 @@
 import os
 import sys
+import platform
 # DON'T CHANGE THIS !!!
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from flask import Flask, send_from_directory
 from flask_cors import CORS
-from src.models.user import db
-from src.models.supplier import Supplier
-from src.models.cost_table import CostTable, CostItem
-from src.models.approval import Approval, ApprovalTemplate
-from src.routes.user import user_bp
-from src.routes.auth import auth_bp
-from src.routes.supplier import supplier_bp
-from src.routes.cost_table import cost_table_bp
-from src.routes.approval import approval_bp
-from src.routes.dashboard import dashboard_bp
+from models.user import db
+from models.supplier import Supplier
+from models.cost_table import CostTable, CostItem
+from models.approval import Approval, ApprovalTemplate
+from routes.user import user_bp
+from routes.auth import auth_bp
+from routes.supplier import supplier_bp
+from routes.cost_table import cost_table_bp
+from routes.approval import approval_bp
+from routes.dashboard import dashboard_bp
 
 app = Flask(__name__, static_folder=os.path.join(os.path.dirname(__file__), 'static'))
 app.config['SECRET_KEY'] = 'asdf#FGSgvasgf$5$WGT'
