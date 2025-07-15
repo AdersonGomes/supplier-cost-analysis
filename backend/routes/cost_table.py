@@ -4,10 +4,10 @@ import os
 import hashlib
 import pandas as pd
 from datetime import datetime
-from src.models.cost_table import CostTable, CostItem
-from src.models.supplier import Supplier
-from src.models.user import User, db
-from src.routes.auth import login_required, role_required
+from models.cost_table import CostTable, CostItem
+from models.supplier import Supplier
+from models.user import User, db
+from routes.auth import login_required, role_required
 
 cost_table_bp = Blueprint('cost_table', __name__)
 

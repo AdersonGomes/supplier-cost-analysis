@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
-from src.models.supplier import Supplier
-from src.models.user import db
-from src.routes.auth import login_required, role_required
+from models.supplier import Supplier
+from models.user import db
+from routes.auth import login_required, role_required
 
 supplier_bp = Blueprint('supplier', __name__)
 

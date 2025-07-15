@@ -1,8 +1,8 @@
 from flask import Blueprint, request, jsonify, session
-from src.models.approval import Approval, ApprovalTemplate
-from src.models.cost_table import CostTable
-from src.models.user import User, db
-from src.routes.auth import login_required, role_required
+from models.approval import Approval, ApprovalTemplate
+from models.cost_table import CostTable
+from models.user import User, db
+from routes.auth import login_required, role_required
 from datetime import datetime
 
 approval_bp = Blueprint('approval', __name__)

@@ -1,11 +1,11 @@
 from flask import Blueprint, request, jsonify, session
 from sqlalchemy import func, and_, or_
 from datetime import datetime, timedelta
-from src.models.cost_table import CostTable
-from src.models.approval import Approval
-from src.models.supplier import Supplier
-from src.models.user import User, db
-from src.routes.auth import login_required
+from models.cost_table import CostTable
+from models.approval import Approval
+from models.supplier import Supplier
+from models.user import User, db
+from routes.auth import login_required
 
 dashboard_bp = Blueprint('dashboard', __name__)
 
