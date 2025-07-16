@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
+import UploadModal from './UploadModal'
 import { 
   Upload, 
   Search, 
@@ -19,6 +20,7 @@ export default function CostTables() {
   const [costTables, setCostTables] = useState([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
+  const [uploadModalOpen, setUploadModalOpen] = useState(false)
 
   useEffect(() => {
     fetchCostTables()
@@ -29,13 +31,17 @@ export default function CostTables() {
       const response = await fetch('/api/cost-tables', { credentials: 'include' })
       if (response.ok) {
         const data = await response.json()
-        setCostTables(data.cost_tables)
+        setCostTables(data.cost_tables || [])
       }
     } catch (error) {
       console.error('Erro ao carregar tabelas de custo:', error)
     } finally {
       setLoading(false)
     }
+  }
+
+  const handleUploadSuccess = () => {
+    fetchCostTables() // Recarregar lista
   }
 
   const getStatusBadge = (status) => {
@@ -89,7 +95,10 @@ export default function CostTables() {
           </p>
         </div>
         {(user?.role === 'supplier' || user?.role === 'admin') && (
-          <Button className="bg-blue-600 hover:bg-blue-700">
+          <Button 
+            onClick={() => setUploadModalOpen(true)}
+            className="bg-blue-600 hover:bg-blue-700"
+          >
             <Upload className="h-4 w-4 mr-2" />
             Nova Tabela
           </Button>
@@ -195,7 +204,10 @@ export default function CostTables() {
                   }
                 </p>
                 {user?.role === 'supplier' && (
-                  <Button className="bg-blue-600 hover:bg-blue-700">
+                  <Button 
+                    onClick={() => setUploadModalOpen(true)}
+                    className="bg-blue-600 hover:bg-blue-700"
+                  >
                     <Upload className="h-4 w-4 mr-2" />
                     Enviar Primeira Tabela
                   </Button>
@@ -205,6 +217,13 @@ export default function CostTables() {
           </Card>
         )}
       </div>
+
+      {/* Modal de Upload */}
+      <UploadModal 
+        isOpen={uploadModalOpen}
+        onClose={() => setUploadModalOpen(false)}
+        onSuccess={handleUploadSuccess}
+      />
     </div>
   )
 }
